@@ -3,7 +3,7 @@ title: code
 order: 1
 ---
 
-<API id="Animation"></API>
+<API id="SwiperTouchAnimation"></API>
 
 <!-- TODO: 自动化参数还是有问题，需要排查一下 -->
 

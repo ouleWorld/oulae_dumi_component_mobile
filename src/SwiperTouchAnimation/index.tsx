@@ -30,7 +30,7 @@ interface IAnimationProps {
 const SwiperTouchAnimation = forwardRef<
   SwiperTouchAnimationHandle,
   IAnimationProps
->((props: IAnimationProps, ref: any) => {
+>((props, ref) => {
   // setTimout key
   const $SettimeoutRef = useRef({
     end: 0,
