@@ -2,11 +2,10 @@ import * as React from 'react';
 import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-// TODO: 待解决
-// 好像是因为这个没有声明，所以这里是没有代码提示的。。。。
+// 由于 dumi 会特殊处理组件的引用，所以代码运行不会报错，不过暂时不知道这个报错怎么处理 0.0
 import {
   SwiperTouchAnimation,
-  SwiperTouchAnimationHandle,
+  type SwiperTouchAnimationHandle,
 } from 'oulae_dumi_component_mobile';
 import 'swiper/css';
 import './demo1.less';

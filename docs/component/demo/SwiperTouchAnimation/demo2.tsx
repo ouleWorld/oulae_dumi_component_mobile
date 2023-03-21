@@ -2,12 +2,15 @@ import * as React from 'react';
 import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { SwiperTouchAnimation } from 'oulae_dumi_component_mobile';
+import {
+  SwiperTouchAnimation,
+  type SwiperTouchAnimationHandle,
+} from 'oulae_dumi_component_mobile';
 import 'swiper/css';
 import './demo2.less';
 
 export default () => {
-  const $AnimationRef = useRef(null) as any;
+  const $AnimationRef = useRef<SwiperTouchAnimationHandle>(null);
   return (
     <div className="SwiperTouchAnimation-2">
       <div className="animation">

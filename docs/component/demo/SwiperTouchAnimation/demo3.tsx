@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import {
   SwiperTouchAnimation,
-  SwiperTouchAnimationHandle,
+  type SwiperTouchAnimationHandle,
 } from 'oulae_dumi_component_mobile';
 import 'swiper/css';
 import './demo1.less';
