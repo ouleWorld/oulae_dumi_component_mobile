@@ -7,13 +7,26 @@ import {
   useRef,
   useState,
 } from 'react';
+import type { Swiper as SwiperClass } from 'swiper/types';
 import styles from './index.module.less';
 import { caculateFra, dynamicStyle } from './utils';
 
 export type SwiperTouchAnimationHandle = {
-  touchStart: (e: any) => void;
-  touchMove: (e: any) => void;
-  slideChangeTransitionStart: (e: any) => void;
+  /**
+   * @description: Swiper onTouchStart 回调函数，主要用于组件的初始化
+   * @return {*} void
+   */
+  touchStart: (e: SwiperClass) => void;
+  /**
+   * @description: Swiper onTouchMove 回调函数，用于控制 touchmove 期间的动画
+   * @return {*}
+   */
+  touchMove: (e: SwiperClass) => void;
+  /**
+   * @description: Swiper onSlidePrevTransitionStart，onSlideNextTransitionStart，onSlideResetTransitionStart 回调函数，用于执行 transition 期间的回调函数
+   * @return {*}
+   */
+  slideChangeTransitionStart: (e: SwiperClass) => void;
 };
 
 interface IAnimationProps {
