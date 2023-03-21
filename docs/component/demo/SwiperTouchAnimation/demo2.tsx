@@ -14,6 +14,9 @@ export default () => {
         <SwiperTouchAnimation
           ref={$AnimationRef}
           animationFra={31}
+          animationImgUrl={
+            'https://img.alicdn.com/imgextra/i2/O1CN01zpsELl1jRewOmKX3R_!!6000000004545-0-tps-252-8064.jpg'
+          }
         ></SwiperTouchAnimation>
       </div>
 

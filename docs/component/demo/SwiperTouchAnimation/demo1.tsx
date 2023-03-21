@@ -3,18 +3,25 @@ import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // TODO: 待解决
-import { SwiperTouchAnimation } from 'oulae_dumi_component_mobile';
+// 好像是因为这个没有声明，所以这里是没有代码提示的。。。。
+import {
+  SwiperTouchAnimation,
+  SwiperTouchAnimationHandle,
+} from 'oulae_dumi_component_mobile';
 import 'swiper/css';
 import './demo1.less';
 
 export default () => {
-  const $AnimationRef = useRef(null) as any;
+  const $AnimationRef = useRef<SwiperTouchAnimationHandle>(null);
   return (
     <div className="SwiperTouchAnimation-1">
       <div className="animation">
         <SwiperTouchAnimation
           ref={$AnimationRef}
           animationFra={31}
+          animationImgUrl={
+            'https://img.alicdn.com/imgextra/i2/O1CN01zpsELl1jRewOmKX3R_!!6000000004545-0-tps-252-8064.jpg'
+          }
         ></SwiperTouchAnimation>
       </div>
 

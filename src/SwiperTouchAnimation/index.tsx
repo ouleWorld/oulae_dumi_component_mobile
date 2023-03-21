@@ -7,74 +7,35 @@ import {
   useRef,
   useState,
 } from 'react';
-// TODO: 这里有一个 ts 问题需要修改
 import styles from './index.module.less';
+import { caculateFra, dynamicStyle } from './utils';
 
-interface IAnimationProps {
-  animationFra: number; // 表示帧动画的总帧数
-}
-
-/**
- * @description: 根据 swiper 的下一页计算出对应的关键帧
- * @param {any} animationData
- * @param {number} nextActiveIndex 表示 swiper 的下一个
- * @param {number} animationFra 表示动画的总帧数
- * @return {}
- */
-const caculateFra = (
-  animationData: any,
-  nextActiveIndex: number,
-  animationFra: number,
-) => {
-  const { swiperPaginationNumber } = animationData;
-  const fra = Number(
-    ((nextActiveIndex / swiperPaginationNumber) * animationFra).toFixed(0),
-  );
-  return fra;
+export type SwiperTouchAnimationHandle = {
+  touchStart: (e: any) => void;
+  touchMove: (e: any) => void;
+  slideChangeTransitionStart: (e: any) => void;
 };
 
-// 动态操作 style 的 class，这里想要集中管理，所以这里写成了 class
-class dynamicStyle {
-  id: string;
-  static i: dynamicStyle;
-
-  constructor() {
-    this.id = 'animationCss';
-  }
-
-  // 单例模式的写法
-  static instance(...rest: []) {
-    this.i = this.i || new this(...rest);
-    return this.i;
-  }
-
-  // 初始化 style 标签，将动态的 style 标签插入到页面中
-  append() {
-    const style = document.createElement('style');
-    style.type = 'text/css';
-    style.innerHTML = '';
-    style.id = this.id;
-    document?.getElementsByTagName('HEAD')?.item(0)?.appendChild(style);
-  }
-
-  update(content: string) {
-    const style = document.querySelector('#animationCss');
-    if (style) {
-      style.innerHTML = content;
-    }
-  }
-
-  // destroy() {
-
-  // }
+interface IAnimationProps {
+  /**
+   * @description 表示帧动画的总帧数
+   */
+  animationFra: number;
+  /**
+   * @description 表示帧动画的图像地址(暂时只支持图像按Y轴排列)
+   */
+  animationImgUrl: string;
 }
 
-const Animation = (props: IAnimationProps, ref: any) => {
+const SwiperTouchAnimation = forwardRef<
+  SwiperTouchAnimationHandle,
+  IAnimationProps
+>((props: IAnimationProps, ref: any) => {
   // setTimout key
   const $SettimeoutRef = useRef({
     end: 0,
   });
-  const { animationFra } = props;
+  const { animationFra, animationImgUrl } = props;
   const [animationData, setanimationData] = useState({
     touchMoveOutStatus: false, // 动画的状态，true 表示触发动画，false 表示不触发动画
     allDistance: 0, // 表示 swiper 滑动到末尾的总位移
@@ -153,13 +114,6 @@ const Animation = (props: IAnimationProps, ref: any) => {
 
   useImperativeHandle(ref, () => {
     return {
-      /**
-       * @description: swiper touchstart 的回调事件，用于动画的初始化
-       * @param {number} allDistance 表示 swiper 滑动到末尾的总位移
-       * @param {number} longSwipesMs 表示动画的持续时间
-       * @return {*}
-       */
-
       touchStart: (e: any) => {
         // e.slidesSizesGrid: [353.266, 353.266, 353.266, 39.7344]
         // e.slidesSizesGrid 表示 swiper 每一页的宽度
@@ -217,11 +171,6 @@ const Animation = (props: IAnimationProps, ref: any) => {
           });
         }
       },
-      /**
-       * @description: swiper touchmove 的回调时间，用于控制 touchmove 的动画流程
-       * @param {*} translate：表示当前swiper 动画 translate 移动的总距离
-       * @return {*}
-       */
       touchMove: (e: any) => {
         /**
          * touchMove 分为3种情况：
@@ -284,10 +233,11 @@ const Animation = (props: IAnimationProps, ref: any) => {
         )}
         style={{
           backgroundPosition: `${0}% ${Math.abs(frames / animationFra) * 100}%`,
+          backgroundImage: `url(${animationImgUrl})`,
         }}
       ></div>
     </div>
   );
-};
+});
 
-export default forwardRef(Animation);
+export default SwiperTouchAnimation;
