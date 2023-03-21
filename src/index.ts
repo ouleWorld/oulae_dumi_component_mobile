@@ -3,6 +3,7 @@ import SwiperTouchAnimation from './SwiperTouchAnimation';
 
 /**
  * [参考链接 - TypeScript Warning: Export, reexported as, was not found (possible exports)](https://github.com/typescript-cheatsheets/react#section-1-setup-typescript-with-react)
+ * [参考链接 - Leveraging Type-Only imports and exports with TypeScript 3.8](https://javascript.plainenglish.io/leveraging-type-only-imports-and-exports-with-typescript-3-8-5c1be8bd17fb)
  *
  * Typescript 类型导出存在着两种方案：
  * 1. 使用 export *
