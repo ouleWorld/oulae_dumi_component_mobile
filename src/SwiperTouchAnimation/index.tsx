@@ -52,10 +52,8 @@ const SwiperTouchAnimation = forwardRef<
   const [animationData, setanimationData] = useState({
     touchMoveOutStatus: false, // 动画的状态，true 表示触发动画，false 表示不触发动画
     allDistance: 0, // 表示 swiper 滑动到末尾的总位移
-    curTranslate: 0, // 表示 swiper 当前的位移
     swiperPaginationNumber: 0, // 表示 swiper 翻页多少次之后到末尾
     animationTime: 300, // 表示 swiper 动画执行的时间，单位为 ms
-    slideSplit: 0, // 表示 swiper 单词翻译需要 translate 的距离
     activeIndex: 0, // 当前 swiper 处于激活状态的 SwiperSlide 页面
     frames: 0, // 表示动画当前的帧数
   });
@@ -73,6 +71,7 @@ const SwiperTouchAnimation = forwardRef<
     // 判断一下是否需要触发动画
     if (fraTemp) {
       // 动画内容
+      // 如果需要做横版帧动画的兼容，则需要改动 background-position
       const str = `
         @keyframes steps_vertical_icon {
           0% {
@@ -104,7 +103,6 @@ const SwiperTouchAnimation = forwardRef<
 
       // 动画执行完成之后，复原状态
       $SettimeoutRef.current.end = window.setTimeout(() => {
-        // react 18之前，异步函数中的多个 useState 不会被合并更新, 项目中使用给的 react16
         setanimationData((data) => {
           return {
             ...data,
@@ -132,7 +130,6 @@ const SwiperTouchAnimation = forwardRef<
         // e.slidesSizesGrid 表示 swiper 每一页的宽度
         // temp: 表示 swiper 跳转到最后一页时所需要 translate 的位移数
         // e.slidesSizesGrid.length - 2： 表示 swiper 跳转到最后一页时所需要跳转的次数
-        console.log('touchStart e: ', e);
 
         let allDistance = 0;
         let swiperPaginationNumber = 0;
@@ -171,7 +168,6 @@ const SwiperTouchAnimation = forwardRef<
         }
 
         const animationTime = e.passedParams?.speed || 300;
-        const slideSplit = e.slidesSizesGrid[0];
         if (allDistance !== animationData.allDistance) {
           setanimationData((data) => {
             return {
@@ -179,7 +175,6 @@ const SwiperTouchAnimation = forwardRef<
               allDistance,
               swiperPaginationNumber,
               animationTime,
-              slideSplit,
             };
           });
         }
@@ -194,7 +189,7 @@ const SwiperTouchAnimation = forwardRef<
          */
         const { translate } = e;
         const { allDistance } = animationData;
-        console.log('====> touchMove translate:', translate, allDistance);
+        // console.log('====> touchMove translate:', translate, allDistance);
 
         // 如果 $SettimeoutRef.current.end 存在 true 值，则表示当前还有动画还未执行完，需要将动画的内容清除
         if ($SettimeoutRef.current.end) {
@@ -218,7 +213,6 @@ const SwiperTouchAnimation = forwardRef<
             ...data,
             // 由于可能存在动画可能，因此这里需要将动画的状态值变更为 false
             touchMoveOutStatus: false,
-            curTranslate: translate,
             frames: Math.abs(frames),
           };
         });
