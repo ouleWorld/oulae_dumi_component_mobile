@@ -24,6 +24,10 @@ order: 1
 
 <code src="./demo/ImageCheck/demo1.tsx"></code>
 
+## API
+
+<API id="ImageCheck"></API>
+
 ## 图片边界跳转回正
 
 图片的回正只要是以来下面这段代码：

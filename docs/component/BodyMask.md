@@ -20,3 +20,7 @@ BodyMask 的原理其实就是 ReactDOM.createPortal 这个 API
 ## demo
 
 <code src="./demo/BodyMask/demo1.tsx"></code>
+
+## API
+
+<API id="BodyMask"></API>
