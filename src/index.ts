@@ -1,5 +1,6 @@
 import BodyMask from './BodyMask';
 import Foo from './Foo';
+import ImageCheck from './ImageCheck';
 import SwiperTouchAnimation from './SwiperTouchAnimation';
 
 /**
@@ -20,4 +21,4 @@ export * from './SwiperTouchAnimation';
 // export type { SwiperTouchAnimationHandle } from './SwiperTouchAnimation';
 /** ----------------------------------------------------- */
 export { SwiperTouchAnimation };
-export { Foo, BodyMask };
+export { Foo, BodyMask, ImageCheck };
