@@ -19,6 +19,17 @@ $ npm start
 $ npm run build
 ```
 
+# 发布流程
+
+```bash
+# 发布一个 patch 版本
+$ npm version patch -m "build: release %s"
+
+$ npm run prepublishOnly
+
+$ npm publish
+```
+
 # 部署
 
 [dumi - 自动部署](https://d.umijs.org/guide/faq#%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2)
