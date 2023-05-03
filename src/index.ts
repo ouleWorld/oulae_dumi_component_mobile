@@ -1,3 +1,4 @@
+import BodyMask from './BodyMask';
 import Foo from './Foo';
 import SwiperTouchAnimation from './SwiperTouchAnimation';
 
@@ -19,4 +20,4 @@ export * from './SwiperTouchAnimation';
 // export type { SwiperTouchAnimationHandle } from './SwiperTouchAnimation';
 /** ----------------------------------------------------- */
 export { SwiperTouchAnimation };
-export { Foo };
+export { Foo, BodyMask };
